@@ -17,6 +17,11 @@
       </ul>
     </template>
   </TopLine>
+  <div class="g-container">
+    <div class="posts-list">
+      <PostPreview :avatar="stories[0].avatar" :username="stories[0].username" />
+    </div>
+  </div>
 </div>
 </template>
 
@@ -24,6 +29,7 @@
 import TopLine from '../components/TopLine.vue'
 import IconView from '../icons/IconView.vue'
 import StoryUserItem from '@/components/StoryUserItem.vue'
+import PostPreview from '@/components/PostPreview.vue'
 import stories from './data.json'
 
 export default {
@@ -31,7 +37,8 @@ export default {
   components: {
     TopLine,
     IconView,
-    StoryUserItem
+    StoryUserItem,
+    PostPreview
   },
   data () {
     return {
