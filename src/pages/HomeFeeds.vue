@@ -18,8 +18,8 @@
     </template>
   </TopLine>
   <div class="g-container">
-    <div class="posts-list">
-      <PostPreview :avatar="stories[0].avatar" :username="stories[0].username" />
+    <div class="posts-list" v-for="post in posts" :key="post.id">
+      <PostPreview :postData="post" />
     </div>
   </div>
 </div>
@@ -31,6 +31,7 @@ import IconView from '../icons/IconView.vue'
 import StoryUserItem from '@/components/StoryUserItem.vue'
 import PostPreview from '@/components/PostPreview.vue'
 import stories from './data.json'
+import posts from './posts.json'
 
 export default {
   name: 'HomeFeeds',
@@ -42,7 +43,7 @@ export default {
   },
   data () {
     return {
-      stories
+      stories, posts
     }
   },
   methods: {

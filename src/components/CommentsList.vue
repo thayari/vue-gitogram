@@ -2,9 +2,9 @@
 	<div class="c-comments">
 			<TogglerButton @onToggle="toggle" />
 			<ul class="comments-list" v-if="shown">
-				<li class="comment" v-for="i in 3" :key="i" >
-					<span class="username">joshua_l</span>
-					<span class="text">Enable performance measuring in production, at the user's request</span>
+				<li class="comment" v-for="comment in comments" :key="comment.id" >
+					<span class="username">{{ comment.username }}</span>
+					<span class="text">{{ comment.text }}</span>
 				</li>
 			</ul>
 		</div>
@@ -15,6 +15,11 @@ import TogglerButton from './TogglerButton.vue'
 export default {
   components: {
     TogglerButton
+  },
+  props: {
+    comments: {
+      type: Object
+    }
   },
   data () {
     return {

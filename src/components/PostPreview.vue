@@ -2,13 +2,13 @@
 	<div class="c-post">
 		<div class="profile">
 			<div class="avatar">
-				<img :src="avatar">
+				<img :src="postData.user.avatar">
 			</div>
-			<div class="username">{{ username }}</div>
+			<div class="username">{{ postData.user.username }}</div>
 		</div>
-		<RepositoryPreview />
-		<CommentsList />
-		<div class="date">15 May</div>
+		<RepositoryPreview :repositoryData="postData.repository" />
+		<CommentsList :comments="postData.comments" />
+		<div class="date">{{ postData.date }}</div>
 	</div>
 </template>
 
@@ -19,12 +19,8 @@ import RepositoryPreview from './RepositoryPreview.vue'
 export default {
   name: 'PostPreview',
   props: {
-    avatar: {
-      type: String,
-      required: true
-    },
-    username: {
-      type: String,
+    postData: {
+      type: Object,
       required: true
     }
   },
