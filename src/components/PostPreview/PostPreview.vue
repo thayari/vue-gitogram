@@ -6,15 +6,14 @@
 			</div>
 			<div class="username">{{ postData.user.username }}</div>
 		</div>
-		<RepositoryPreview :repositoryData="postData.repository" />
+		<slot name="repository"></slot>
 		<CommentsList :comments="postData.comments" />
 		<div class="date">{{ postData.date }}</div>
 	</div>
 </template>
 
 <script>
-import CommentsList from './CommentsList.vue'
-import RepositoryPreview from './RepositoryPreview.vue'
+import CommentsList from '../CommentsList/CommentsList.vue'
 
 export default {
   name: 'PostPreview',
@@ -25,8 +24,7 @@ export default {
     }
   },
   components: {
-    CommentsList,
-    RepositoryPreview
+    CommentsList
   }
 }
 </script>

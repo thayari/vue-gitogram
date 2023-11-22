@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import IconView from '../icons/IconView.vue'
+import IconView from '../../icons/IconView.vue'
 
 export default {
   name: 'TogglerButton',

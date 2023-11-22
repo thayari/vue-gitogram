@@ -1,15 +1,15 @@
 <template>
 	<div class="count-button">
-		<button class="button">
+		<div class="button">
 			<IconView :name="iconName" v-if="iconName" />
 			<span>{{ label }}</span>
-		</button>
+		</div>
 		<div class="count">{{ count }}</div>
 	</div>
 </template>
 
 <script>
-import IconView from '../icons/IconView.vue'
+import IconView from '../../icons/IconView.vue'
 export default {
   name: 'CountButton',
   components: {
@@ -47,10 +47,6 @@ export default {
 		.icon {
 			height: 16px;
 			margin-right: 4px;
-		}
-
-		&:hover {
-			background-color: #f0f0f0;
 		}
 	}
 

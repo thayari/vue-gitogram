@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import TogglerButton from './TogglerButton.vue'
+import TogglerButton from '../TogglerButton/TogglerButton.vue'
 export default {
   components: {
     TogglerButton

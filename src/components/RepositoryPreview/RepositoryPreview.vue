@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import CountButton from './CountButton.vue'
+import CountButton from '../PostStats/PostStats.vue'
 
 export default {
   name: 'RepositoryPreview',

@@ -19,17 +19,23 @@
   </TopLine>
   <div class="g-container">
     <div class="posts-list" v-for="post in posts" :key="post.id">
-      <PostPreview :postData="post" />
+      <PostPreview :postData="post">
+        <template #repository>
+          <RepositoryPreview :repositoryData="post.repository" />
+        </template>
+      </PostPreview>
     </div>
   </div>
 </div>
 </template>
 
 <script>
-import TopLine from '../components/TopLine.vue'
+import TopLine from '../components/TopLine/TopLine.vue'
 import IconView from '../icons/IconView.vue'
-import StoryUserItem from '@/components/StoryUserItem.vue'
-import PostPreview from '@/components/PostPreview.vue'
+import StoryUserItem from '@/components/StoryUserItem/StoryUserItem.vue'
+import PostPreview from '@/components/PostPreview/PostPreview.vue'
+import RepositoryPreview from '@/components/RepositoryPreview/RepositoryPreview.vue'
+
 import stories from './data.json'
 import posts from './posts.json'
 
@@ -39,7 +45,8 @@ export default {
     TopLine,
     IconView,
     StoryUserItem,
-    PostPreview
+    PostPreview,
+    RepositoryPreview
   },
   data () {
     return {
