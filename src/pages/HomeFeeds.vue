@@ -3,7 +3,11 @@
 	<TopLine>
     <template #headline>
       <h1 class="logo">Gitogram /</h1>
-      <IconView name="IconHome" />
+      <div class="icons">
+        <IconView name="IconHome" />
+        <div class="avatar"></div>
+        <IconView name="IconSignout" />
+      </div>
     </template>
     <template #content>
       <ul class="stories">

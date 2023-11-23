@@ -20,7 +20,8 @@ export default {
       type: String,
       required: true
     }
-  }
+  },
+  emits: ['onClick']
 }
 </script>
 

@@ -4,6 +4,23 @@
 	margin-right: auto;
 }
 
+.icons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 145px;
+	width: 145px;
+}
+
+.avatar {
+	width: 37px;
+	height: 37px;
+	border-radius: 50%;
+	background-color: #7f7f7f;
+	background-image: url('../assets/userAvatar.png');
+}
+
 .stories {
 	display: flex;
 	flex-direction: row;
