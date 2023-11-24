@@ -12,9 +12,7 @@
 import IconView from '../../icons/IconView.vue'
 export default {
   name: 'CountButton',
-  components: {
-    IconView
-  },
+  components: { IconView },
   props: {
     label: {
       type: String,
