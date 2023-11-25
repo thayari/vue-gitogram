@@ -2,14 +2,12 @@ import CommentsList from './CommentsList.vue'
 
 export default {
   title: 'CommentsList',
-  components: { CommentsList }
+  component: { CommentsList }
 }
 
 export const DefaultView = () => ({
   components: { CommentsList },
-  template: '<CommentsList :comments="postData.comments" />'
+  template: '<CommentsList></CommentsList>'
 })
 
-DefaultView.story = {
-  name: 'Стандартный вид'
-}
+DefaultView.storyName = 'Стандартный вид'

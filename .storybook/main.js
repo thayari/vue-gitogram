@@ -10,6 +10,9 @@ const config = {
     name: "@storybook/vue3-webpack5",
     options: {},
   },
+  core: {
+    builder: '@storybook/builder-webpack5'
+  },
   docs: {
     autodocs: "tag",
   },
