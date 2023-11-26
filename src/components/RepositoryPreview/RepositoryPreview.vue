@@ -1,10 +1,10 @@
 <template>
 	<div class="c-repository">
-		<h2 class="title">{{ repositoryData.title }}</h2>
-		<p class="description">{{ repositoryData.description }}</p>
+		<h2 class="title">{{ title }}</h2>
+		<p class="description">{{ description }}</p>
 		<div class="details-container">
-			<CountButton label="Star" iconName="IconStar" :count=repositoryData.starCount />
-			<CountButton label="Fork" iconName="IconFork" :count=repositoryData.forkCount />
+			<CountButton label="Star" iconName="IconStar" :count=starCount />
+			<CountButton label="Fork" iconName="IconFork" :count=forkCount />
 		</div>
 	</div>
 </template>
@@ -18,15 +18,21 @@ export default {
     CountButton
   },
   props: {
-    repositoryData: {
-      type: Object,
-      required: true,
-      default: () => ({
-        title: '',
-        description: '',
-        starCount: 0,
-        forkCount: 0
-      })
+    title: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String,
+      required: true
+    },
+    starCount: {
+      type: [String, Number],
+      default: 0
+    },
+    forkCount: {
+      type: [String, Number],
+      default: 0
     }
   }
 }

@@ -22,13 +22,28 @@
     </template>
   </TopLine>
   <div class="g-container">
-    <div class="posts-list" v-for="post in posts" :key="post.id">
+    <div class="posts-list" v-for="item in posts.items" :key="item.id">
+      <PostPreview
+        :avatar="item.owner.avatar_url"
+        :username="item.owner.login"
+        :date="item.created_at">
+        <template #repository>
+          <RepositoryPreview
+            :title="item.name"
+            :description="item.description"
+            :starCount="item.stargazers_count"
+            :forkCount="item.forks"
+          />
+        </template>
+      </PostPreview>
+    </div>
+    <!-- <div class="posts-list" v-for="post in posts" :key="post.id">
       <PostPreview :postData="post">
         <template #repository>
           <RepositoryPreview :repositoryData="post.repository" />
         </template>
       </PostPreview>
-    </div>
+    </div> -->
   </div>
 </div>
 </template>
@@ -56,7 +71,9 @@ export default {
   },
   data () {
     return {
-      stories, posts
+      stories,
+      posts,
+      items: []
     }
   },
   methods: {
@@ -64,8 +81,16 @@ export default {
       // console.log(id)
     }
   },
-  created () {
-    api.trendings.getTrendings()
+  async created () {
+    try {
+      const { data } = await api.trendings.getTrendings()
+
+      this.items = data.items
+    } catch (error) {
+      console.log(error)
+    }
+
+    console.log(posts.items)
   }
 }
 </script>

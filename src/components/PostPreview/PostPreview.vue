@@ -1,9 +1,9 @@
 <template>
 	<div class="c-post">
-		<UserItem :avatar="postData.user.avatar" :username="postData.user.username" />
+		<UserItem :avatar="avatar" :username="username" />
 		<slot name="repository"></slot>
-		<CommentsList :comments="postData.comments" />
-		<div class="date">{{ postData.date }}</div>
+		<CommentsList v-if="comments" :comments="comments" />
+		<div class="date">{{ formattedDate }}</div>
 	</div>
 </template>
 
@@ -14,14 +14,36 @@ import UserItem from '../UserItem/UserItem.vue'
 export default {
   name: 'PostPreview',
   props: {
-    postData: {
-      type: Object,
+    avatar: {
+      type: String,
       required: true
+    },
+    username: {
+      type: String,
+      required: true
+    },
+    comments: {
+      type: Array
+    },
+    date: {
+      type: String
     }
   },
   components: {
     CommentsList,
     UserItem
+  },
+  computed: {
+    formattedDate () {
+      return this.formatDateString(this.date)
+    }
+  },
+  methods: {
+    formatDateString (dateString) {
+      const options = { day: 'numeric', month: 'long' }
+      const date = new Date(dateString)
+      return date.toLocaleDateString('en-US', options)
+    }
   }
 }
 </script>
