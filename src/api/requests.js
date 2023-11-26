@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'http://api.github.com'
+const baseURL = 'https://api.github.com'
 
 /**
  * Makes an HTTP request using Axios.

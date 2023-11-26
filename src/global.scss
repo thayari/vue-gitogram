@@ -48,6 +48,31 @@ button {
 }
 
 .g-container {
-	width: 1200px;
-	margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 767px) {
+  .g-container {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .g-container {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .g-container {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .g-container {
+    width: 1200px;
+  }
 }

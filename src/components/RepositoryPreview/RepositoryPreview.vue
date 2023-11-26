@@ -24,7 +24,7 @@ export default {
     },
     description: {
       type: String,
-      required: true
+      default: ''
     },
     starCount: {
       type: [String, Number],
