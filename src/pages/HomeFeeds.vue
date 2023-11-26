@@ -43,6 +43,8 @@ import RepositoryPreview from '@/components/RepositoryPreview/RepositoryPreview.
 import stories from './data.json'
 import posts from './posts.json'
 
+import * as api from '../api'
+
 export default {
   name: 'HomeFeeds',
   components: {
@@ -61,6 +63,9 @@ export default {
     handleUserItemClick (id) {
       // console.log(id)
     }
+  },
+  created () {
+    api.trendings.getTrendings()
   }
 }
 </script>

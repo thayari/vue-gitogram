@@ -22,10 +22,9 @@ export default {
 	line-height: 22px;
 	font-weight: 700;
 	padding: 11px 18px;
-	border: none;
 	border-radius: 5px;
-	cursor: pointer;
 	transition: background-color 200ms ease;
+	width: 100%;
 
 	&:hover {
 		background-color: #1f883d;

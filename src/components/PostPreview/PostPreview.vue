@@ -1,11 +1,6 @@
 <template>
 	<div class="c-post">
-		<div class="profile">
-			<div class="avatar">
-				<img :src="postData.user.avatar">
-			</div>
-			<div class="username">{{ postData.user.username }}</div>
-		</div>
+		<UserItem :avatar="postData.user.avatar" :username="postData.user.username" />
 		<slot name="repository"></slot>
 		<CommentsList :comments="postData.comments" />
 		<div class="date">{{ postData.date }}</div>
@@ -14,6 +9,7 @@
 
 <script>
 import CommentsList from '../CommentsList/CommentsList.vue'
+import UserItem from '../UserItem/UserItem.vue'
 
 export default {
   name: 'PostPreview',
@@ -24,7 +20,8 @@ export default {
     }
   },
   components: {
-    CommentsList
+    CommentsList,
+    UserItem
   }
 }
 </script>
