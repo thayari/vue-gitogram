@@ -1,15 +1,15 @@
 <template>
-  <HomeFeeds />
+  <router-view />
 </template>
 
 <script>
-import HomeFeeds from './pages/HomeFeeds.vue'
+// import HomeFeeds from './pages/HomeFeeds.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HomeFeeds
-  }
+  name: 'App'
+  // components: {
+  //   HomeFeeds
+  // }
 }
 
 </script>

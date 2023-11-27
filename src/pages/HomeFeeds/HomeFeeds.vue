@@ -42,16 +42,15 @@
 </template>
 
 <script>
-import TopLine from '../components/TopLine/TopLine.vue'
-import IconView from '../icons/IconView.vue'
+import TopLine from '../../components/TopLine/TopLine.vue'
+import IconView from '../../icons/IconView.vue'
 import StoryUserItem from '@/components/StoryUserItem/StoryUserItem.vue'
 import PostPreview from '@/components/PostPreview/PostPreview.vue'
 import RepositoryPreview from '@/components/RepositoryPreview/RepositoryPreview.vue'
 
-import stories from './data.json'
-import posts from './posts.json'
+import stories from '../data.json'
 
-import * as api from '../api'
+import * as api from '../../api'
 
 export default {
   name: 'HomeFeeds',
@@ -65,7 +64,6 @@ export default {
   data () {
     return {
       stories,
-      posts,
       items: []
     }
   },
