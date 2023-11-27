@@ -11,7 +11,7 @@
 <script>
 import IconView from '../../icons/IconView.vue'
 export default {
-  name: 'CountButton',
+  name: 'PostStats',
   components: { IconView },
   props: {
     label: {

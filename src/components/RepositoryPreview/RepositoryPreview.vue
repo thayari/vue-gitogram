@@ -3,19 +3,19 @@
 		<h2 class="title">{{ title }}</h2>
 		<p class="description">{{ description }}</p>
 		<div class="details-container">
-			<CountButton label="Star" iconName="IconStar" :count=starCount />
-			<CountButton label="Fork" iconName="IconFork" :count=forkCount />
+			<PostStats label="Star" iconName="IconStar" :count=starCount />
+			<PostStats label="Fork" iconName="IconFork" :count=forkCount />
 		</div>
 	</div>
 </template>
 
 <script>
-import CountButton from '../PostStats/PostStats.vue'
+import PostStats from '../PostStats/PostStats.vue'
 
 export default {
   name: 'RepositoryPreview',
   components: {
-    CountButton
+    PostStats
   },
   props: {
     title: {

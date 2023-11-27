@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@storybook/addon-storysource": "^7.5.3",
     "@storybook/preset-scss": "^1.0.3",
     "axios": "^1.6.2",
     "core-js": "^3.8.3",
