@@ -7,7 +7,11 @@ export default {
 
 const template = () => ({
   components: { SliderItem },
-  template: '<SliderItem>Some text</SliderItem>'
+  template: `<SliderItem>
+    <template #content>
+      Some text
+    </template>
+  </SliderItem>`
 })
 
 export const DefaultView = template.bind({})

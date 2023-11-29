@@ -4,7 +4,7 @@
 			<ProgressBar />
 			<div class="user-wrapper">
 				<UserItem
-					:avatar="'https://picsum.photos/id/25/300/300'"
+					:avatar="'https://i.pravatar.cc/100'"
 					:username="'Alex'"
 					:isSmall="true"/>
 			</div>
@@ -12,7 +12,7 @@
 
 		<div class="middle-container">
 			<div class="content-wrapper">
-				<slot></slot>
+				<slot name="content"></slot>
 			</div>
 		</div>
 
