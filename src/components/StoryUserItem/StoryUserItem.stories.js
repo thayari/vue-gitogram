@@ -1,16 +1,16 @@
-import UserItem from './UserItem.vue'
+import StoryUserItem from './StoryUserItem.vue'
 
 export default {
-  title: 'UserItem',
-  component: { UserItem }
+  title: 'StoryUserItem',
+  component: { StoryUserItem }
 }
 
 const template = (args) => ({
-  components: { UserItem },
+  components: { StoryUserItem },
   data () {
     return { args }
   },
-  template: '<UserItem v-bind="args"></UserItem>'
+  template: '<StoryUserItem v-bind="args"></StoryUserItem>'
 })
 
 export const DefaultView = template.bind({})
@@ -18,6 +18,6 @@ export const DefaultView = template.bind({})
 DefaultView.storyName = 'Стандартный вид'
 
 DefaultView.args = {
-  avatar: 'https://i.pravatar.cc/150',
+  avatar: 'https://i.pravatar.cc/300',
   username: 'Username'
 }
