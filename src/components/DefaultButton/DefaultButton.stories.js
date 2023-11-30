@@ -12,7 +12,7 @@ export default {
   }
 }
 
-const template = (args) => ({
+const template = args => ({
   components: { DefaultButton },
   data () {
     return { args }
