@@ -2,7 +2,7 @@
 <div>
 	<TopLine>
     <template #headline>
-      <h1 class="logo">Gitogram /</h1>
+      <LogoView />
       <div class="icons">
         <IconView name="IconHome" />
         <div class="avatar"></div>
@@ -11,11 +11,11 @@
     </template>
     <template #content>
       <ul class="stories">
-        <li class="stories-item" v-for="story in stories" :key="story.id">
+        <li class="stories-item" v-for="item in items" :key="item.id">
           <StoryUserItem
-            :avatar="story.avatar"
-            :username="story.username"
-            @onClick="handleUserItemClick(story.id)"
+            :avatar="item.owner.avatar_url"
+            :username="item.owner.login"
+            @onClick="handleUserItemClick(item.full_name)"
           />
         </li>
       </ul>
@@ -42,24 +42,26 @@
 </template>
 
 <script>
-import TopLine from '../../components/TopLine/TopLine.vue'
+import TopLine from '@/components/TopLine/TopLine.vue'
 import IconView from '../../icons/IconView.vue'
 import StoryUserItem from '@/components/StoryUserItem/StoryUserItem.vue'
 import PostPreview from '@/components/PostPreview/PostPreview.vue'
 import RepositoryPreview from '@/components/RepositoryPreview/RepositoryPreview.vue'
+import LogoView from '@/components/LogoView/LogoView.vue'
 
 import stories from '../data.json'
 
 import * as api from '../../api'
 
 export default {
-  name: 'HomeFeeds',
+  name: 'HomeFeedsPage',
   components: {
     TopLine,
     IconView,
     StoryUserItem,
     PostPreview,
-    RepositoryPreview
+    RepositoryPreview,
+    LogoView
   },
   data () {
     return {
@@ -68,8 +70,10 @@ export default {
     }
   },
   methods: {
-    handleUserItemClick (id) {
-      // console.log(id)
+    async handleUserItemClick (repo) {
+      const { data } = await api.readme.getReadme(repo)
+      this.$router.push({ name: 'stories' })
+      console.log(data)
     }
   },
   async created () {
@@ -84,4 +88,4 @@ export default {
 }
 </script>
 
-<style lang="scss" src="./HomeFeeds.scss" scoped></style>
+<style lang="scss" src="./HomeFeedsPage.scss" scoped></style>

@@ -7,13 +7,17 @@ export default {
 
 const template = () => ({
   components: { SliderItem },
-  template: `<SliderItem>
-    <template #content>
-      Some text
-    </template>
-  </SliderItem>`
+  data () {
+    return {
+      showButtons: true
+    }
+  },
+  template: `<SliderItem
+    :active="true"
+    :loading="false"
+    :data="{ content: 'Some text' }"
+  />`
 })
 
 export const DefaultView = template.bind({})
-
 DefaultView.storyName = 'Стандартный вид'

@@ -27,6 +27,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.c-story-user-item {
+  max-width: 80px;
+}
+
 .avatar {
   width: 80px;
   height: 80px;
@@ -69,5 +73,9 @@ export default {
   font-size: 12px;
   font-weight: 400;
   margin-top: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 </style>

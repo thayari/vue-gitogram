@@ -1,6 +1,15 @@
-import HomeFeeds from '../pages/HomeFeeds/HomeFeeds.vue'
+import HomeFeedsPage from '../pages/HomeFeedsPage/HomeFeedsPage.vue'
+import StoriesPage from '../pages/StoriesPage/StoriesPage.vue'
 
-export default [{
-  path: '/',
-  component: HomeFeeds
-}]
+export default [
+  {
+    path: '/',
+    component: HomeFeedsPage,
+    name: 'home'
+  },
+  {
+    path: '/stories',
+    component: StoriesPage,
+    name: 'stories'
+  }
+]

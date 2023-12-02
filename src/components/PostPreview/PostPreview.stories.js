@@ -11,7 +11,7 @@ const template = () => ({
     return {
       avatar: 'https://i.pravatar.cc/100',
       username: 'Username',
-      date: '1701468660784'
+      date: '2023-11-30T14:50:01Z'
     }
   },
   template: `<PostPreview

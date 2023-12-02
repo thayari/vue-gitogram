@@ -3,13 +3,9 @@
 </template>
 
 <script>
-// import HomeFeeds from './pages/HomeFeeds.vue'
 
 export default {
   name: 'App'
-  // components: {
-  //   HomeFeeds
-  // }
 }
 
 </script>

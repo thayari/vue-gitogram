@@ -1,7 +1,7 @@
 <template>
-	<div class="c-slider-item">
+	<div class="c-slider-item" :class="{ active }">
 		<div class="top-container">
-			<ProgressBar />
+			<ProgressBar :active="active" />
 			<div class="user-wrapper">
 				<UserItem
 					:avatar="'https://i.pravatar.cc/100'"
@@ -12,7 +12,17 @@
 
 		<div class="middle-container">
 			<div class="content-wrapper">
-				<slot name="content"></slot>
+				<div class="loader" v-if="loading">
+          <SpinnerView />
+				</div>
+				<div
+					v-if="data.content?.length && !loading"
+					v-html="data.content"
+					class="content"></div>
+				<PlaceholderView
+					v-else
+					:paragraphs="2"
+				/>
 			</div>
 		</div>
 
@@ -21,6 +31,13 @@
 				<DefaultButton />
 			</div>
 		</div>
+
+		<template>
+			<button class="btn btn-left">
+			</button>
+			<button class="btn btn-right">
+			</button>
+		</template>
 	</div>
 </template>
 
@@ -28,13 +45,25 @@
 import DefaultButton from '../DefaultButton/DefaultButton.vue'
 import UserItem from '../UserItem/UserItem.vue'
 import ProgressBar from '../ProgressBar/ProgressBar.vue'
+import PlaceholderView from '../PlaceholderView/PlaceholderView.vue'
+import SpinnerView from '../SpinnerView/SpinnerView.vue'
 
 export default {
   name: 'SliderItem',
   components: {
+    SpinnerView,
     DefaultButton,
     UserItem,
-    ProgressBar
+    ProgressBar,
+    PlaceholderView
+  },
+  props: {
+    active: Boolean,
+    loading: Boolean,
+    data: {
+      type: Object,
+      default: () => ({})
+    }
   }
 }
 
