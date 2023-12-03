@@ -3,6 +3,11 @@
 	border-bottom: 1px solid #c6c6c8;
 	padding: 42px 0 32px;
 	margin-bottom: 32px;
+
+	&.transparent {
+		background: none;
+		border: none;
+	}
 }
 
 .content {

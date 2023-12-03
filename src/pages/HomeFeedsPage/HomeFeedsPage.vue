@@ -11,7 +11,7 @@
     </template>
     <template #content>
       <ul class="stories">
-        <li class="stories-item" v-for="item in items" :key="item.id">
+        <li class="stories-item" v-for="item in items.data" :key="item.id">
           <StoryUserItem
             :avatar="item.owner.avatar_url"
             :username="item.owner.login"
@@ -22,7 +22,8 @@
     </template>
   </TopLine>
   <div class="g-container">
-    <div class="posts-list" v-for="item in items" :key="item.id">
+    <div v-if="items.loading" class="preload">Loading...</div>
+    <div v-else-if="Object.keys(items.data).length" class="posts-list" v-for="item in items.data" :key="item.id">
       <PostPreview
         :avatar="item.owner.avatar_url"
         :username="item.owner.login"
@@ -49,9 +50,7 @@ import PostPreview from '@/components/PostPreview/PostPreview.vue'
 import RepositoryPreview from '@/components/RepositoryPreview/RepositoryPreview.vue'
 import LogoView from '@/components/LogoView/LogoView.vue'
 
-import stories from '../data.json'
-
-import * as api from '../../api'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'HomeFeedsPage',
@@ -63,27 +62,21 @@ export default {
     RepositoryPreview,
     LogoView
   },
-  data () {
-    return {
-      stories,
-      items: []
-    }
+  computed: {
+    ...mapState({
+      items: state => state.items
+    })
   },
   methods: {
-    async handleUserItemClick (repo) {
-      const { data } = await api.readme.getReadme(repo)
+    ...mapActions({
+      fetchTrendings: 'fetchTrendings'
+    }),
+    async handleUserItemClick () {
       this.$router.push({ name: 'stories' })
-      console.log(data)
     }
   },
   async created () {
-    try {
-      const { data } = await api.trendings.getTrendings()
-
-      this.items = data.items
-    } catch (error) {
-      console.log(error)
-    }
+    this.fetchTrendings()
   }
 }
 </script>

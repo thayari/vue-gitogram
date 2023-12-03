@@ -1,15 +1,15 @@
 <template>
 	<div class="wrapper">
-		<header class="header">
-			<div class="g-container">
+		<TopLine transparent>
+			<template #headline>
 				<button class="logo" @click="router.push('/')">
 					<LogoView :white="true" />
 				</button>
 				<button class="close-btn">
 					<IconView name="CloseIcon" />
 				</button>
-			</div>
-		</header>
+			</template>
+		</TopLine>
 		<div class="content">
 			<StoriesSlider />
 		</div>
@@ -20,17 +20,18 @@
 import IconView from '../../icons/IconView.vue'
 import LogoView from '@/components/LogoView/LogoView.vue'
 import StoriesSlider from '@/components/StoriesSlider/StoriesSlider.vue'
+import TopLine from '@/components/TopLine/TopLine.vue'
 
 export default {
-  components: { IconView, LogoView, StoriesSlider },
-  mounted () {
-    const readmeData = this.$route.params.readmeData
-    console.log(readmeData)
-  }
+  name: 'StoriesPage',
+  components: { IconView, LogoView, StoriesSlider, TopLine }
 }
 
 </script>
 
 <style lang="scss" scoped>
-
+.wrapper {
+	height: 100vh;
+	background: #101010;
+}
 </style>

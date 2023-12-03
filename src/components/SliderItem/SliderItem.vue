@@ -4,8 +4,8 @@
 			<ProgressBar :active="active" />
 			<div class="user-wrapper">
 				<UserItem
-					:avatar="'https://i.pravatar.cc/100'"
-					:username="'Alex'"
+					:avatar="data.owner?.avatar_url"
+					:username="data.owner?.login"
 					:isSmall="true"/>
 			</div>
 		</div>
@@ -32,12 +32,18 @@
 			</div>
 		</div>
 
-		<template>
-			<button class="btn btn-left">
+		<div v-if="active" class="buttons">
+			<button v-if="btnsShown.includes('prev')" class="btn btn-left" @click="$emit('onPrevSlide')">
+				<span class="icon">
+					<IconView name="IconArrow" />
+				</span>
 			</button>
-			<button class="btn btn-right">
+			<button v-if="btnsShown.includes('next')" class="btn btn-right" @click="$emit('onNextSlide')">
+				<span class="icon">
+					<IconView name="IconArrow" />
+				</span>
 			</button>
-		</template>
+		</div>
 	</div>
 </template>
 
@@ -47,6 +53,7 @@ import UserItem from '../UserItem/UserItem.vue'
 import ProgressBar from '../ProgressBar/ProgressBar.vue'
 import PlaceholderView from '../PlaceholderView/PlaceholderView.vue'
 import SpinnerView from '../SpinnerView/SpinnerView.vue'
+import IconView from '@/icons/IconView.vue'
 
 export default {
   name: 'SliderItem',
@@ -55,11 +62,19 @@ export default {
     DefaultButton,
     UserItem,
     ProgressBar,
-    PlaceholderView
+    PlaceholderView,
+    IconView
   },
   props: {
     active: Boolean,
     loading: Boolean,
+    btnsShown: {
+      type: Array,
+      default: () => ['prev', 'next'],
+      validator (value) {
+        return value.every(item => item === 'next' || item === 'prev')
+      }
+    },
     data: {
       type: Object,
       default: () => ({})
@@ -77,6 +92,8 @@ export default {
 	background: #fff;
 	display: flex;
 	flex-direction: column;
+	flex-shrink: 0;
+	transform: scale(0.8);
 
 	.top-container {
 		padding: 8px 8px 0 8px;
@@ -102,10 +119,37 @@ export default {
 		border-top: 1px solid #cacaca;
 		border-bottom: 1px solid #cacaca;
 		overflow-y: scroll;
+		padding: 22px;
 	}
 
 	.user-wrapper {
 		padding: 12px 4px;
+	}
+
+	.buttons {
+    position: absolute;
+    top: 315px;
+    left: -46px;
+    width: 466px;
+    display: none;
+    justify-content: space-between;
+
+		.btn {
+			width: 37px;
+			height: 37px;
+			border-radius: 50%;
+			border: #000 2px solid;
+			background: #fff;
+		}
+	}
+
+	&.active {
+		transform: scale(1);
+
+		.buttons {
+			display: flex;
+
+		}
 	}
 }
 </style>

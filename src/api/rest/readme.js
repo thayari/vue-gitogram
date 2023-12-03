@@ -1,8 +1,8 @@
 import { makeRequest } from '../requests'
 
-export const getReadme = (repo) => {
+export const getReadme = (fullName) => {
   return makeRequest({
-    url: `/repos/${repo}/readme`,
+    url: `/repos/${fullName}/readme`,
     headers: {
       Accept: 'application/vnd.github.v3.html+json'
     }
