@@ -11,19 +11,19 @@
     </template>
     <template #content>
       <ul class="stories">
-        <li class="stories-item" v-for="item in items.data" :key="item.id">
+        <li class="stories-item" v-for="(item, index) in trendings.data" :key="item.id">
           <StoryUserItem
             :avatar="item.owner.avatar_url"
             :username="item.owner.login"
-            @onClick="handleUserItemClick(item.full_name)"
+            @onClick="handleUserItemClick(index)"
           />
         </li>
       </ul>
     </template>
   </TopLine>
   <div class="g-container">
-    <div v-if="items.loading" class="preload">Loading...</div>
-    <div v-else-if="Object.keys(items.data).length" class="posts-list" v-for="item in items.data" :key="item.id">
+    <div v-if="trendings.loading" class="preload">Loading...</div>
+    <div v-else-if="Object.keys(trendings.data).length" class="posts-list" v-for="item in trendings.data" :key="item.id">
       <PostPreview
         :avatar="item.owner.avatar_url"
         :username="item.owner.login"
@@ -64,14 +64,18 @@ export default {
   },
   computed: {
     ...mapState({
-      items: state => state.items
+      trendings: state => state.trendings,
+      currentSlide: state => state.currentSlide
     })
   },
   methods: {
     ...mapActions({
-      fetchTrendings: 'fetchTrendings'
+      fetchTrendings: 'trendings/fetchTrendings',
+      setCurrentSlide: 'setCurrentSlide'
     }),
-    async handleUserItemClick () {
+
+    async handleUserItemClick (index) {
+      this.setCurrentSlide(index)
       this.$router.push({ name: 'stories' })
     }
   },

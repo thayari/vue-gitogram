@@ -6,12 +6,12 @@
 					<LogoView :white="true" />
 				</button>
 				<button class="close-btn">
-					<IconView name="CloseIcon" />
+					<IconView name="IconClose" />
 				</button>
 			</template>
 		</TopLine>
 		<div class="content">
-			<StoriesSlider />
+			<StoriesSlider :initSlide="Number(initSlide)" />
 		</div>
 	</div>
 </template>
@@ -24,7 +24,13 @@ import TopLine from '@/components/TopLine/TopLine.vue'
 
 export default {
   name: 'StoriesPage',
-  components: { IconView, LogoView, StoriesSlider, TopLine }
+  components: { IconView, LogoView, StoriesSlider, TopLine },
+  props: {
+    initSlide: {
+      type: [Number, String],
+      default: 0
+    }
+  }
 }
 
 </script>

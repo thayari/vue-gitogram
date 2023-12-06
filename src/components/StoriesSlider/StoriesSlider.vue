@@ -2,14 +2,13 @@
 	<div class="c-stories-slider">
 		<div class="stories-container" ref="slider">
 			<SliderItem
-        ref="item"
-        v-for="(item, index) in items.data"
+        v-for="(item, index) in trendings.data"
         :data="item"
         :key="item.id"
-        :active="slideIndex == index"
+        :active="currentSlide == index"
         :btnsShown="activeBtns"
-        @onNextSlide="handeleSlide(index+1)"
-        @onPrevSlide="handeleSlide(index-1)"
+        @onNextSlide="handleSlide(index + 1)"
+        @onPrevSlide="handleSlide(index - 1)"
         />
 		</div>
 	</div>
@@ -29,38 +28,47 @@ export default {
   },
   computed: {
     ...mapState({
-      items: state => state.items
+      trendings: state => state.trendings,
+      currentSlide: state => state.currentSlide
     }),
     activeBtns () {
-      if (this.slideIndex === 0) return ['next']
-      if (this.slideIndex === this.items.length - 1) return ['prev']
+      if (this.currentSlide === 0) return ['next']
+      if (this.currentSlide === this.trendings.data.length - 1) return ['prev']
       return ['prev', 'next']
     }
   },
   methods: {
     ...mapActions({
-      fetchTrendings: 'fetchTrendings',
-      fetchReadme: 'repoReadme/fetchReadme'
+      fetchTrendings: 'trendings/fetchTrendings',
+      fetchReadme: 'repoReadme/fetchReadme',
+      setCurrentSlide: 'trendings/setCurrentSlide'
     }),
     async fetchReadmeForActiveSlide () {
-      const fullName = this.items[this.slideIndex].full_name
+      const fullName = this.trendings.data[this.currentSlide]?.full_name
       await this.fetchReadme({ fullName })
     },
-    handleSlide (slideIndex) {
-      const { slider, item } = this.$refs
-      const slideWidth = parseInt(
-        getComputedStyle(item).getPropertyValue('width'),
-        10
-      )
+    async handleSlide (slideIndex) {
+      this.setCurrentSlide(slideIndex)
 
-      this.slideIndex = slideIndex
+      const { slider } = this.$refs
+      const slideWidth = 388
+
       this.sliderPosition = -(slideWidth * slideIndex)
 
-      slider.style.transform = `translateX(${this.sliderPosition})`
+      slider.style.transform = `translateX(${this.sliderPosition}px)`
+
+      await this.loadReadme()
+    },
+    async loadReadme () {
+      await this.fetchReadmeForActiveSlide()
     }
   },
   async created () {
     await this.fetchTrendings()
+    await this.loadReadme()
+  },
+  mounted () {
+    this.handleSlide(this.currentSlide)
   }
 }
 </script>

@@ -10,6 +10,7 @@ export default [
   {
     path: '/stories',
     component: StoriesPage,
-    name: 'stories'
+    name: 'stories',
+    props: route => ({ initSlide: route.query.initSlide })
   }
 ]

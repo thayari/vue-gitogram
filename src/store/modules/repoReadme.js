@@ -12,13 +12,13 @@ export const repoReadme = {
   },
   mutations: {
     setReadmeData (state, payload) {
-      state.items.data = payload
+      state.data = payload
     },
     setReadmeLoading (state, payload) {
-      state.items.loading = payload
+      state.loading = payload
     },
     setReadmeError (state, payload) {
-      state.items.error = payload
+      state.error = payload
     }
   },
   actions: {
@@ -26,8 +26,6 @@ export const repoReadme = {
       state.commit('setReadmeLoading', true)
       try {
         const { data } = await api.readme.getReadme(fullName)
-
-        this.items = data.items
 
         state.commit('setReadmeData', data.items)
         state.commit('setReadmeError', '')

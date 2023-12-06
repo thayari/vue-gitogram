@@ -16,7 +16,7 @@
           <SpinnerView />
 				</div>
 				<div
-					v-if="data.content?.length && !loading"
+					v-if="data.content && !loading"
 					v-html="data.content"
 					class="content"></div>
 				<PlaceholderView
@@ -34,13 +34,13 @@
 
 		<div v-if="active" class="buttons">
 			<button v-if="btnsShown.includes('prev')" class="btn btn-left" @click="$emit('onPrevSlide')">
-				<span class="icon">
-					<IconView name="IconArrow" />
+				<span class="slider-icon">
+					<IconView name="IconArrowSlider" />
 				</span>
 			</button>
 			<button v-if="btnsShown.includes('next')" class="btn btn-right" @click="$emit('onNextSlide')">
-				<span class="icon">
-					<IconView name="IconArrow" />
+				<span class="slider-icon">
+					<IconView name="IconArrowSlider" />
 				</span>
 			</button>
 		</div>
@@ -94,6 +94,7 @@ export default {
 	flex-direction: column;
 	flex-shrink: 0;
 	transform: scale(0.8);
+	opacity: 0.7;
 
 	.top-container {
 		padding: 8px 8px 0 8px;
@@ -132,23 +133,46 @@ export default {
     left: -46px;
     width: 466px;
     display: none;
-    justify-content: space-between;
 
 		.btn {
+			position: absolute;
 			width: 37px;
 			height: 37px;
 			border-radius: 50%;
 			border: #000 2px solid;
 			background: #fff;
+			color: #404040;
+		}
+
+		.btn-left {
+			left: 0;
+		}
+
+		.btn-right {
+			right: 0;
+			.slider-icon {
+				transform: scaleX(-1);
+			}
+		}
+	}
+
+	.slider-icon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: color .2s ease;
+
+		&:hover {
+			color: #31AE54;
 		}
 	}
 
 	&.active {
 		transform: scale(1);
+		opacity: 1;
 
 		.buttons {
 			display: flex;
-
 		}
 	}
 }
