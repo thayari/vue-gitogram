@@ -11,10 +11,10 @@ export const trendings = {
     setItemsData (state, payload) {
       state.data = payload
     },
-    setItemsLoading (state, payload) {
+    setLoading (state, payload) {
       state.loading = payload
     },
-    setItemsError (state, payload) {
+    setError (state, payload) {
       state.error = payload
     },
     setReadme (state, payload) {
@@ -27,20 +27,42 @@ export const trendings = {
       })
     }
   },
+  getters: {
+    getRepoById: state => id => {
+      return state.data.find(item => item.id === id)
+    }
+  },
   actions: {
     async fetchTrendings (state) {
-      state.commit('setItemsLoading', true)
+      state.commit('setLoading', true)
       try {
         const { data } = await api.trendings.getTrendings()
 
-        this.items = data.items
+        this.data = data.items
 
         state.commit('setItemsData', data.items)
-        state.commit('setItemsError', '')
+        state.commit('setError', '')
       } catch (error) {
-        state.commit('setItemsError', error)
+        state.commit('setError', error)
       } finally {
-        state.commit('setItemsLoading', false)
+        state.commit('setLoading', false)
+      }
+    },
+    async fetchReadme (state, { id, fullName }) {
+      const currentRepo = state.getters.getRepoById(id)
+      if (currentRepo.readme) return
+
+      state.commit('setLoading', true)
+      try {
+        const { data } = await api.readme.getReadme(fullName)
+
+        state.commit('setReadme', { id, content: data })
+        state.commit('setError', '')
+      } catch (error) {
+        state.commit('setReadme', { id, content: '' })
+        state.commit('setError', error)
+      } finally {
+        state.commit('setLoading', false)
       }
     }
   }

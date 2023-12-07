@@ -40,12 +40,13 @@ export default {
   methods: {
     ...mapActions({
       fetchTrendings: 'trendings/fetchTrendings',
-      fetchReadme: 'repoReadme/fetchReadme',
-      setCurrentSlide: 'trendings/setCurrentSlide'
+      fetchReadme: 'trendings/fetchReadme',
+      setCurrentSlide: 'setCurrentSlide'
     }),
     async fetchReadmeForActiveSlide () {
       const fullName = this.trendings.data[this.currentSlide]?.full_name
-      await this.fetchReadme({ fullName })
+      const id = this.trendings.data[this.currentSlide]?.id
+      await this.fetchReadme({ id, fullName })
     },
     async handleSlide (slideIndex) {
       this.setCurrentSlide(slideIndex)
@@ -65,10 +66,9 @@ export default {
   },
   async created () {
     await this.fetchTrendings()
-    await this.loadReadme()
   },
-  mounted () {
-    this.handleSlide(this.currentSlide)
+  async mounted () {
+    await this.handleSlide(this.currentSlide)
   }
 }
 </script>

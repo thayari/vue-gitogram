@@ -2,11 +2,11 @@
 	<div class="wrapper">
 		<TopLine transparent>
 			<template #headline>
-				<button class="logo" @click="router.push('/')">
+				<button class="logo" @click="redirectToHome">
 					<LogoView :white="true" />
 				</button>
 				<button class="close-btn">
-					<IconView name="IconClose" />
+					<IconView name="IconClose"  @click="redirectToHome"/>
 				</button>
 			</template>
 		</TopLine>
@@ -30,6 +30,11 @@ export default {
       type: [Number, String],
       default: 0
     }
+  },
+  methods: {
+    redirectToHome () {
+      this.$router.push('/')
+    }
   }
 }
 
@@ -39,5 +44,10 @@ export default {
 .wrapper {
 	height: 100vh;
 	background: #101010;
+}
+
+.close-btn {
+	margin-left: auto;
+	color: #fff;
 }
 </style>

@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-import { repoReadme } from './modules/repoReadme'
 import { trendings } from './modules/trendings'
 
 export default createStore({
@@ -18,7 +17,6 @@ export default createStore({
     }
   },
   modules: {
-    repoReadme,
     trendings
   }
 })

@@ -16,8 +16,8 @@
           <SpinnerView />
 				</div>
 				<div
-					v-if="data.content && !loading"
-					v-html="data.content"
+					v-if="data.readme && !loading"
+					v-html="data.readme"
 					class="content"></div>
 				<PlaceholderView
 					v-else
@@ -117,6 +117,7 @@ export default {
 	.content-wrapper {
 		width: 100%;
 		height: 100%;
+		max-height: 500px;
 		border-top: 1px solid #cacaca;
 		border-bottom: 1px solid #cacaca;
 		overflow-y: scroll;
