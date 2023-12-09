@@ -28,7 +28,7 @@
 
 		<div class="bottom-container">
 			<div class="button-wrapper">
-				<DefaultButton />
+				<DefaultButton>Follow</DefaultButton>
 			</div>
 		</div>
 

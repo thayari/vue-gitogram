@@ -6,7 +6,7 @@
       <div class="icons">
         <IconView name="IconHome" />
         <div class="avatar"></div>
-        <IconView name="IconSignout" />
+        <IconView name="IconSignout" @click="signout"/>
       </div>
     </template>
     <template #content>
@@ -77,6 +77,11 @@ export default {
     async handleUserItemClick (index) {
       this.setCurrentSlide(index)
       this.$router.push({ name: 'stories' })
+    },
+
+    signout () {
+      localStorage.clear()
+      this.$router.replace({ name: 'auth' })
     }
   },
   async created () {
