@@ -16,7 +16,23 @@ export const getToken = code => {
   })
     .then(response => {
       console.log('Response:', response)
-      return response.token
+      return response
+    })
+    .catch(error => {
+      throw error
+    })
+}
+
+export const getUser = () => {
+  return makeRequest({
+    url: 'https://api.github.com/user',
+    headers: {
+      Authorization: `token ${localStorage.getItem('gitogramToken')}`
+    }
+  })
+    .then(response => {
+      console.log('Response:', response)
+      return response
     })
     .catch(error => {
       throw error

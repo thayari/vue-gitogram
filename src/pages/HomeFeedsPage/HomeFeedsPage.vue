@@ -5,7 +5,7 @@
       <LogoView />
       <div class="icons">
         <IconView name="IconHome" />
-        <div class="avatar"></div>
+        <div class="avatar" :style="{ 'background-image': `url(${userAvatarUrl})` }"></div>
         <IconView name="IconSignout" @click="signout"/>
       </div>
     </template>
@@ -73,7 +73,11 @@ export default {
     ...mapState({
       trendings: state => state.trendings,
       currentSlide: state => state.currentSlide
-    })
+    }),
+    userAvatarUrl () {
+      // Assuming you have a Vuex store and 'user' module with 'data' property
+      return this.$store.state.user.data.avatar_url || 'none' // Provide a fallback URL if avatar_url is not available
+    }
   },
   methods: {
     ...mapActions({

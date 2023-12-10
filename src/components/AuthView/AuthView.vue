@@ -14,8 +14,10 @@ import IconView from '@/icons/IconView.vue'
 import DefaultButton from '@/components/DefaultButton/DefaultButton.vue'
 import * as api from '../../api'
 import env from '../../../env.js'
+import { mapActions } from 'vuex'
 
 export default {
+  name: 'AuthView',
   components: { LogoView, IconView, DefaultButton },
   methods: {
     authorizeWithGithub () {
@@ -27,6 +29,10 @@ export default {
       params.append('scope', 'repo:status read:user')
 
       window.location.href = `${githubAuthApi}?${params}`
+    },
+    ...mapActions('user', ['updateUser']),
+    updateUserData (data) {
+      this.updateUser(data)
     }
   },
   async created () {
@@ -34,8 +40,24 @@ export default {
 
     if (code) {
       try {
-        const token = await api.auth.getToken(code)
+        const response = await api.auth.getToken(code)
+        const token = response?.data?.token
+
+        if (!token) {
+          throw new Error(response)
+        }
+
         localStorage.setItem('gitogramToken', token)
+
+        const getUserResponse = await api.auth.getUser()
+        const userData = getUserResponse.data
+
+        if (userData) {
+          this.updateUserData(userData)
+        } else {
+          throw new Error('Invalid user data')
+        }
+
         this.$router.replace({ name: 'home' })
       } catch (error) {
         console.error('Error:', error)
