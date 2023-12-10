@@ -7,9 +7,10 @@
 <script>
 export default {
   name: 'ProgressBar',
-  data () {
-    return {
-      active: false
+  props: {
+    active: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['onFinish'],
@@ -20,9 +21,6 @@ export default {
   },
   mounted () {
     this.$refs.progressLine.addEventListener('transitionend', this.emitOnFinish)
-    this.$nextTick(() => {
-      this.active = true
-    })
   },
   beforeUnmount () {
     this.$refs.progressLine.removeEventListener('transitionend', this.emitOnFinish)
@@ -45,11 +43,11 @@ export default {
 		width: 0%;
 		border-radius: 1px;
 		background: #31AE54;
-		transition: width 5000ms linear;
 	}
 
 	&.active {
 		.progress-line {
+			transition: width 5000ms linear;
 			width: 100%;
 		}
 	}

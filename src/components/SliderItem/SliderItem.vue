@@ -1,7 +1,7 @@
 <template>
 	<div class="c-slider-item" :class="{ active }">
 		<div class="top-container">
-			<ProgressBar :active="active" />
+			<ProgressBar :active="active" @onFinish="handleProgressFinish" />
 			<div class="user-wrapper">
 				<UserItem
 					:avatar="data.owner?.avatar_url"
@@ -13,7 +13,7 @@
 		<div class="middle-container">
 			<div class="content-wrapper">
 				<div class="loader" v-if="loading">
-          <SpinnerView />
+          <LoaderView />
 				</div>
 				<div
 					v-if="data.readme && !loading"
@@ -52,13 +52,13 @@ import DefaultButton from '../DefaultButton/DefaultButton.vue'
 import UserItem from '../UserItem/UserItem.vue'
 import ProgressBar from '../ProgressBar/ProgressBar.vue'
 import PlaceholderView from '../PlaceholderView/PlaceholderView.vue'
-import SpinnerView from '../SpinnerView/SpinnerView.vue'
+import LoaderView from '../LoaderView/LoaderView.vue'
 import IconView from '@/icons/IconView.vue'
 
 export default {
   name: 'SliderItem',
   components: {
-    SpinnerView,
+    LoaderView,
     DefaultButton,
     UserItem,
     ProgressBar,
@@ -78,6 +78,13 @@ export default {
     data: {
       type: Object,
       default: () => ({})
+    }
+  },
+  methods: {
+    handleProgressFinish () {
+      if (this.btnsShown.includes('next')) {
+        this.$emit('onNextSlide')
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
 <span class="icon">
-  <IconView :name="IconLoading"/>
+  <IconView name="IconLoading"/>
 </span>
 </template>
 
@@ -14,7 +14,7 @@ export default {
 
 <style scoped>
 .icon {
-  animation: rotation 3s linear;
+  animation: rotation 2s linear infinite;
 }
 
 @keyframes rotation {

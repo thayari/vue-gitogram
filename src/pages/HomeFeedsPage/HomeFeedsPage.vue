@@ -10,7 +10,10 @@
       </div>
     </template>
     <template #content>
-      <ul class="stories">
+      <div class="loader-wrapper" v-if="trendings.loading">
+        <LoaderView />
+      </div>
+      <ul class="stories" v-else-if="Object.keys(trendings.data).length">
         <li class="stories-item" v-for="(item, index) in trendings.data" :key="item.id">
           <StoryUserItem
             :avatar="item.owner.avatar_url"
@@ -22,7 +25,9 @@
     </template>
   </TopLine>
   <div class="g-container">
-    <div v-if="trendings.loading" class="preload">Loading...</div>
+    <div class="loader-wrapper" v-if="trendings.loading">
+      <LoaderView />
+    </div>
     <div v-else-if="Object.keys(trendings.data).length" class="posts-list" v-for="item in trendings.data" :key="item.id">
       <PostPreview
         :avatar="item.owner.avatar_url"
@@ -49,6 +54,7 @@ import StoryUserItem from '@/components/StoryUserItem/StoryUserItem.vue'
 import PostPreview from '@/components/PostPreview/PostPreview.vue'
 import RepositoryPreview from '@/components/RepositoryPreview/RepositoryPreview.vue'
 import LogoView from '@/components/LogoView/LogoView.vue'
+import LoaderView from '@/components/LoaderView/LoaderView.vue'
 
 import { mapState, mapActions } from 'vuex'
 
@@ -60,7 +66,8 @@ export default {
     StoryUserItem,
     PostPreview,
     RepositoryPreview,
-    LogoView
+    LogoView,
+    LoaderView
   },
   computed: {
     ...mapState({

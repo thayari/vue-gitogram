@@ -1,5 +1,5 @@
 <template>
-	<component :is='name' class="icon"></component>
+	<component :is='name' class='icon'></component>
 </template>
 
 <script>
