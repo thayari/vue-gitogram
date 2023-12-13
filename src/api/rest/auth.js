@@ -23,7 +23,7 @@ export const getToken = code => {
     })
 }
 
-export const getUser = () => {
+export const getUserData = () => {
   return makeRequest({
     url: 'https://api.github.com/user',
     headers: {

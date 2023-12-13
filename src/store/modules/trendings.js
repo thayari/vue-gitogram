@@ -64,6 +64,9 @@ export const trendings = {
       } finally {
         state.commit('setLoading', false)
       }
+    },
+    async starRepo (state, id) {
+      console.log(id)
     }
   }
 }

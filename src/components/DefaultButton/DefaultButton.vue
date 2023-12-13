@@ -1,17 +1,26 @@
 <template>
-	<button class="c-button">
-		<slot></slot>
+	<button class="c-button" :class="{ disabled: disabled }">
+		<LoaderView v-if="loading" />
+		<slot v-else ></slot>
 	</button>
 </template>
 
 <script>
+import LoaderView from '../LoaderView/LoaderView.vue'
+
 export default {
   name: 'DefaultButton',
   props: {
-    textContent: {
-      type: String
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
-  }
+  },
+  components: { LoaderView }
 }
 </script>
 
@@ -31,7 +40,12 @@ export default {
 	justify-content: center;
 	align-items: center;
 
-	&:hover {
+	&.disabled {
+		background-color: #9E9E9E;
+		pointer-events: none;
+	}
+
+	&:not(.disabled):hover {
 		background-color: #1f883d;
 	}
 }

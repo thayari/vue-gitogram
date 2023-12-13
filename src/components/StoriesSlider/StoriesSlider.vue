@@ -9,6 +9,7 @@
         :btnsShown="activeBtns"
         @onNextSlide="handleSlide(index + 1)"
         @onPrevSlide="handleSlide(index - 1)"
+        @onFollow="starRepo"
         />
 		</div>
 	</div>
@@ -41,7 +42,8 @@ export default {
     ...mapActions({
       fetchTrendings: 'trendings/fetchTrendings',
       fetchReadme: 'trendings/fetchReadme',
-      setCurrentSlide: 'setCurrentSlide'
+      setCurrentSlide: 'setCurrentSlide',
+      starRepo: 'trendings/starRepo'
     }),
     async fetchReadmeForActiveSlide () {
       const fullName = this.trendings.data[this.currentSlide]?.full_name

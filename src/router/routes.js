@@ -18,5 +18,9 @@ export default [
     path: '/auth',
     component: AuthPage,
     name: 'auth'
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
   }
 ]

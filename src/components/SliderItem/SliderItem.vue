@@ -28,7 +28,7 @@
 
 		<div class="bottom-container">
 			<div class="button-wrapper">
-				<DefaultButton>Follow</DefaultButton>
+				<DefaultButton @click="$emit('onFollow', data.id)">Follow</DefaultButton>
 			</div>
 		</div>
 
@@ -65,6 +65,7 @@ export default {
     PlaceholderView,
     IconView
   },
+  emits: ['onNextSlide', 'onPrevSlide', 'onFollow'],
   props: {
     active: Boolean,
     loading: Boolean,
