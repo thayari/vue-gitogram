@@ -33,7 +33,9 @@ export const makeRequest = ({
   url,
   method = 'get',
   data = {},
-  headers = {}
+  headers = {
+    Authorization: `token ${localStorage.getItem('gitogramToken')}`
+  }
 }) => axios({
   url, method, data, baseURL, headers
 })

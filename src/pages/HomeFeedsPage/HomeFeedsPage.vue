@@ -25,10 +25,10 @@
     </template>
   </TopLine>
   <div class="g-container">
-    <div class="loader-wrapper" v-if="trendings.loading">
+    <div class="loader-wrapper" v-if="starred.loading">
       <LoaderView />
     </div>
-    <div v-else-if="Object.keys(trendings.data).length" class="posts-list" v-for="item in trendings.data" :key="item.id">
+    <div v-else-if="Object.keys(starred.data).length" class="posts-list" v-for="item in starred.data" :key="item.id">
       <PostPreview
         :avatar="item.owner.avatar_url"
         :username="item.owner.login"
@@ -72,15 +72,16 @@ export default {
   computed: {
     ...mapState({
       trendings: state => state.trendings,
+      starred: state => state.starred,
       currentSlide: state => state.currentSlide
     }),
     userAvatarUrl () {
-      // Assuming you have a Vuex store and 'user' module with 'data' property
-      return this.$store.state.user.data.avatar_url || 'none' // Provide a fallback URL if avatar_url is not available
+      return this.$store.state.user.data.avatar_url || 'none'
     }
   },
   methods: {
     ...mapActions({
+      fetchStarred: 'starred/fetchStarred',
       fetchTrendings: 'trendings/fetchTrendings',
       setCurrentSlide: 'setCurrentSlide'
     }),
@@ -97,6 +98,8 @@ export default {
   },
   async created () {
     this.fetchTrendings()
+    this.fetchStarred()
+    console.log(this.starred)
   }
 }
 </script>

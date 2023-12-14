@@ -49,7 +49,7 @@ export default {
 
         localStorage.setItem('gitogramToken', token)
 
-        const getUserResponse = await api.auth.getUserData()
+        const getUserResponse = await api.user.getUserData()
         const userData = getUserResponse.data
 
         if (userData) {

@@ -22,19 +22,3 @@ export const getToken = code => {
       throw error
     })
 }
-
-export const getUserData = () => {
-  return makeRequest({
-    url: 'https://api.github.com/user',
-    headers: {
-      Authorization: `token ${localStorage.getItem('gitogramToken')}`
-    }
-  })
-    .then(response => {
-      console.log('Response:', response)
-      return response
-    })
-    .catch(error => {
-      throw error
-    })
-}

@@ -23,7 +23,7 @@ router.beforeEach(async (to, from, next) => {
       console.log('User data in store:', userInStore)
       next()
     } else {
-      const user = await api.auth.getUserData()
+      const user = await api.user.getUserData()
       console.log(user)
       next()
     }

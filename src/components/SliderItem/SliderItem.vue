@@ -28,7 +28,12 @@
 
 		<div class="bottom-container">
 			<div class="button-wrapper">
-				<DefaultButton @click="$emit('onFollow', data.id)">Follow</DefaultButton>
+				<DefaultButton
+				:loading="data.following.loading"
+				:grey="data.following.status"
+				@click="$emit(data.following.status ? 'onUnfollow' : 'onFollow', data.id)">
+				{{ data.following.status ? 'Unfollow' : 'Follow' }}
+			</DefaultButton>
 			</div>
 		</div>
 
@@ -65,7 +70,7 @@ export default {
     PlaceholderView,
     IconView
   },
-  emits: ['onNextSlide', 'onPrevSlide', 'onFollow'],
+  emits: ['onNextSlide', 'onPrevSlide', 'onFollow', 'onUnfollow'],
   props: {
     active: Boolean,
     loading: Boolean,

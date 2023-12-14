@@ -1,5 +1,5 @@
 <template>
-	<button class="c-button" :class="{ disabled: disabled }">
+	<button class="c-button" :class="{ grey: grey }">
 		<LoaderView v-if="loading" />
 		<slot v-else ></slot>
 	</button>
@@ -11,7 +11,7 @@ import LoaderView from '../LoaderView/LoaderView.vue'
 export default {
   name: 'DefaultButton',
   props: {
-    disabled: {
+    grey: {
       type: Boolean,
       default: false
     },
@@ -40,14 +40,17 @@ export default {
 	justify-content: center;
 	align-items: center;
 
-	&.disabled {
-		background-color: #9E9E9E;
-		pointer-events: none;
-	}
-
-	&:not(.disabled):hover {
+	&:hover {
 		background-color: #1f883d;
 	}
+	&.grey {
+		background-color: #9E9E9E;
+
+		&:hover {
+			background-color: #777777;
+		}
+	}
+
 }
 
 </style>

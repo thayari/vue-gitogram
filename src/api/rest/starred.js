@@ -1,14 +1,16 @@
 import { makeRequest } from '../requests'
 
-export const getStarredRepos = limit => {
-  const params = new URLSearchParams()
-  if (limit) {
-    params.append('per_page', limit)
-  }
-
+export const getStarredRepos = () => {
   return makeRequest({
-    url: `/user/starred?${params}`
+    url: '/user/starred'
   })
+    .then(response => {
+      console.log('getStarredRepos response:', response)
+      return response
+    })
+    .catch(error => {
+      throw error
+    })
 }
 
 export const starRepo = fullName => {
