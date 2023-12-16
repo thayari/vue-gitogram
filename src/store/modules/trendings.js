@@ -9,13 +9,13 @@ export const trendings = {
   },
   mutations: {
     setItemsData (state, payload) {
-      state.data = payload.map(item => {
-        item.following = {
+      state.data = payload.map(repo => {
+        repo.following = {
           status: false,
           loading: false,
           error: ''
         }
-        return item
+        return repo
       })
     },
     setLoading (state, payload) {
@@ -67,6 +67,7 @@ export const trendings = {
         state.commit('setLoading', false)
       }
     },
+
     async fetchReadme (state, { id, fullName }) {
       const currentRepo = state.getters.getRepoById(id)
       if (currentRepo.readme) return
@@ -84,11 +85,12 @@ export const trendings = {
         state.commit('setLoading', false)
       }
     },
+
     async starRepo (state, id) {
       const repo = state.getters.getRepoById(id)
       const fullName = repo.full_name
 
-      state.commit('SetFollowing', {
+      state.commit('setFollowing', {
         id,
         data: {
           status: false,
@@ -99,14 +101,14 @@ export const trendings = {
 
       try {
         await api.starred.starRepo(fullName)
-        state.commit('SetFollowing', {
+        state.commit('setFollowing', {
           id,
           data: {
             status: true
           }
         })
       } catch (error) {
-        state.commit('SetFollowing', {
+        state.commit('setFollowing', {
           id,
           data: {
             status: false,
@@ -114,7 +116,7 @@ export const trendings = {
           }
         })
       } finally {
-        state.commit('SetFollowing', {
+        state.commit('setFollowing', {
           id,
           data: {
             loading: false

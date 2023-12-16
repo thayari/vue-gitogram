@@ -5,7 +5,7 @@
         v-for="(item, index) in trendings.data"
         :data="item"
         :key="item.id"
-        :active="currentSlide == index"
+        :active="currentSlide == index && !item.loading"
         :btnsShown="activeBtns"
         @onNextSlide="handleSlide(index + 1)"
         @onPrevSlide="handleSlide(index - 1)"
@@ -21,23 +21,28 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'StoriesSlider',
+
   components: {
     SliderItem
   },
+
   data () {
     return {}
   },
+
   computed: {
     ...mapState({
       trendings: state => state.trendings,
       currentSlide: state => state.currentSlide
     }),
+
     activeBtns () {
       if (this.currentSlide === 0) return ['next']
       if (this.currentSlide === this.trendings.data.length - 1) return ['prev']
       return ['prev', 'next']
     }
   },
+
   methods: {
     ...mapActions({
       fetchTrendings: 'trendings/fetchTrendings',
@@ -45,11 +50,17 @@ export default {
       setCurrentSlide: 'setCurrentSlide',
       starRepo: 'trendings/starRepo'
     }),
+
     async fetchReadmeForActiveSlide () {
-      const fullName = this.trendings.data[this.currentSlide]?.full_name
-      const id = this.trendings.data[this.currentSlide]?.id
-      await this.fetchReadme({ id, fullName })
+      const currentData = this.trendings.data[this.currentSlide]
+
+      if (currentData) {
+        const fullName = currentData.full_name
+        const id = currentData.id
+        await this.fetchReadme({ id, fullName })
+      }
     },
+
     async handleSlide (slideIndex) {
       this.setCurrentSlide(slideIndex)
 
@@ -62,14 +73,14 @@ export default {
 
       await this.loadReadme()
     },
+
     async loadReadme () {
       await this.fetchReadmeForActiveSlide()
     }
   },
+
   async created () {
     await this.fetchTrendings()
-  },
-  async mounted () {
     await this.handleSlide(this.currentSlide)
   }
 }
