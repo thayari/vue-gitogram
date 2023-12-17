@@ -20,7 +20,7 @@ export const starRepo = fullName => {
   })
 }
 
-export const unStarRepo = fullName => {
+export const unstarRepo = fullName => {
   return makeRequest({
     url: `/user/starred/${fullName}`,
     method: 'delete'

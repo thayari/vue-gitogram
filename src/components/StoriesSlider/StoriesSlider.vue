@@ -10,6 +10,7 @@
         @onNextSlide="handleSlide(index + 1)"
         @onPrevSlide="handleSlide(index - 1)"
         @onFollow="starRepo"
+        @onUnfollow="unstarRepo"
         />
 		</div>
 	</div>
@@ -48,7 +49,8 @@ export default {
       fetchTrendings: 'trendings/fetchTrendings',
       fetchReadme: 'trendings/fetchReadme',
       setCurrentSlide: 'setCurrentSlide',
-      starRepo: 'trendings/starRepo'
+      starRepo: 'trendings/starRepo',
+      unstarRepo: 'trendings/unstarRepo'
     }),
 
     async fetchReadmeForActiveSlide () {

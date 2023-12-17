@@ -73,6 +73,7 @@ export default {
       starred: state => state.starred,
       currentSlide: state => state.currentSlide
     }),
+
     userAvatarUrl () {
       return this.$store.state.user.data.avatar_url || 'none'
     }

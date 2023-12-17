@@ -7,7 +7,22 @@ export default createStore({
   state: {
     currentSlide: 0
   },
-  getters: {},
+  getters: {
+    getStarredTrendings (state) {
+      const trendingsData = state.trendings.data
+      const starredData = state.starred.data
+
+      const modifiedTrendings = trendingsData.map(trendingsRepo => ({
+        ...trendingsRepo,
+        following: {
+          ...(trendingsRepo.following || {}),
+          status: starredData.some(starredRepo => starredRepo.id === trendingsRepo.id)
+        }
+      }))
+
+      return modifiedTrendings
+    }
+  },
   mutations: {
     setCurrentSlide (state, payload) {
       state.currentSlide = payload
