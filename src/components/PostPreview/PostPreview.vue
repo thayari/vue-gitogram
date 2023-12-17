@@ -1,8 +1,12 @@
 <template>
 	<div class="c-post">
-		<UserItem :avatar="avatar" :username="username" />
+		<UserItem :avatar="itemData.owner.avatar_url" :username="itemData.owner.login" />
 		<slot name="repository"></slot>
-		<CommentsList v-if="comments" :comments="comments" />
+    <CommentsList
+      @onOpened="handleCommentsOpened"
+      :comments="itemData.issues.data"
+      :loading="itemData.issues.loading"
+      />
 		<div class="date">{{ formattedDate }}</div>
 	</div>
 </template>
@@ -10,39 +14,58 @@
 <script>
 import CommentsList from '../CommentsList/CommentsList.vue'
 import UserItem from '../UserItem/UserItem.vue'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'PostPreview',
   props: {
-    avatar: {
-      type: String,
-      required: true
-    },
-    username: {
-      type: String,
-      required: true
-    },
-    comments: {
-      type: Array
-    },
-    date: {
-      type: String
+    itemData: {
+      type: Object,
+      required: true,
+      validator: function (value) {
+        return (
+          value &&
+        typeof value.id === 'number' &&
+        typeof value.owner === 'object' &&
+        typeof value.owner.avatar_url === 'string' &&
+        typeof value.owner.login === 'string' &&
+        typeof value.full_name === 'string'
+        )
+      }
     }
   },
+
   components: {
     CommentsList,
     UserItem
   },
+
   computed: {
+    ...mapState({
+      starred: state => state.starred
+    }),
+
     formattedDate () {
-      return this.formatDateString(this.date)
+      return this.formatDateString(this.itemData.created_at)
     }
   },
+
   methods: {
+    ...mapActions({
+      fetchIssues: 'starred/fetchIssues'
+    }),
+
     formatDateString (dateString) {
       const options = { day: 'numeric', month: 'long' }
       const date = new Date(dateString)
       return date.toLocaleDateString('en-US', options)
+    },
+
+    async handleCommentsOpened () {
+      await this.fetchIssues({
+        id: this.itemData.id,
+        fullName: this.itemData.full_name
+      })
     }
   }
 }

@@ -5,7 +5,7 @@
         v-for="(item, index) in trendings.data"
         :data="item"
         :key="item.id"
-        :active="currentSlide == index && !item.loading"
+        :active="currentSlide == index && !trendings.loading"
         :btnsShown="activeBtns"
         @onNextSlide="handleSlide(index + 1)"
         @onPrevSlide="handleSlide(index - 1)"
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import SliderItem from '../SliderItem/SliderItem.vue'
+import SliderItem from '@/components/SliderItem/SliderItem.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {

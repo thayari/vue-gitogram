@@ -30,9 +30,7 @@
     </div>
     <div v-else-if="Object.keys(starred.data).length" class="posts-list" v-for="item in starred.data" :key="item.id">
       <PostPreview
-        :avatar="item.owner.avatar_url"
-        :username="item.owner.login"
-        :date="item.created_at">
+        :itemData="item">
         <template #repository>
           <RepositoryPreview
             :title="item.name"

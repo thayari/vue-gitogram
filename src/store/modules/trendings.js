@@ -18,12 +18,15 @@ export const trendings = {
         return repo
       })
     },
+
     setLoading (state, payload) {
       state.loading = payload
     },
+
     setError (state, payload) {
       state.error = payload
     },
+
     setReadme (state, payload) {
       state.data = state.data.map(repo => {
         if (payload.id === repo.id) {
@@ -33,6 +36,7 @@ export const trendings = {
         return repo
       })
     },
+
     setFollowing (state, payload) {
       state.data = state.data.map(repo => {
         if (payload.id === repo.id) {
@@ -93,7 +97,6 @@ export const trendings = {
       state.commit('setFollowing', {
         id,
         data: {
-          status: false,
           loading: true,
           error: ''
         }
@@ -112,6 +115,43 @@ export const trendings = {
           id,
           data: {
             status: false,
+            error: error
+          }
+        })
+      } finally {
+        state.commit('setFollowing', {
+          id,
+          data: {
+            loading: false
+          }
+        })
+      }
+    },
+
+    async unstarRepo (state, id) {
+      const repo = state.getters.getRepoById(id)
+      const fullName = repo.full_name
+
+      state.commit('setFollowing', {
+        id,
+        data: {
+          loading: true,
+          error: ''
+        }
+      })
+
+      try {
+        await api.starred.starRepo(fullName)
+        state.commit('setFollowing', {
+          id,
+          data: {
+            status: false
+          }
+        })
+      } catch (error) {
+        state.commit('setFollowing', {
+          id,
+          data: {
             error: error
           }
         })

@@ -15,6 +15,7 @@ export default {
   components: {
     IconView
   },
+  emits: ['onToggle'],
   data () {
     return {
       isOpened: false

@@ -12,9 +12,6 @@
 
 		<div class="middle-container">
 			<div class="content-wrapper">
-				<div class="loader" v-if="loading">
-          <LoaderView />
-				</div>
 				<div
 					v-if="data.readme && !loading"
 					v-html="data.readme"
@@ -57,13 +54,11 @@ import DefaultButton from '../DefaultButton/DefaultButton.vue'
 import UserItem from '../UserItem/UserItem.vue'
 import ProgressBar from '../ProgressBar/ProgressBar.vue'
 import PlaceholderView from '../PlaceholderView/PlaceholderView.vue'
-import LoaderView from '../LoaderView/LoaderView.vue'
 import IconView from '@/icons/IconView.vue'
 
 export default {
   name: 'SliderItem',
   components: {
-    LoaderView,
     DefaultButton,
     UserItem,
     ProgressBar,
