@@ -20,6 +20,10 @@ export default {
   name: 'AuthView',
   components: { LogoView, IconView, DefaultButton },
   methods: {
+    ...mapActions({
+      fetchUser: 'user/fetchUser'
+    }),
+
     authorizeWithGithub () {
       const githubAuthApi = 'https://github.com/login/oauth/authorize'
 
@@ -29,10 +33,6 @@ export default {
       params.append('scope', 'repo:status public_repo read:user')
 
       window.location.href = `${githubAuthApi}?${params}`
-    },
-    ...mapActions('user', ['updateUser']),
-    updateUserData (data) {
-      this.updateUser(data)
     }
   },
   async created () {
@@ -47,16 +47,7 @@ export default {
           throw new Error(response)
         }
 
-        localStorage.setItem('gitogramToken', token)
-
-        const getUserResponse = await api.user.getUserData()
-        const userData = getUserResponse.data
-
-        if (userData) {
-          this.updateUserData(userData)
-        } else {
-          throw new Error('Invalid user data')
-        }
+        await this.fetchUser()
 
         this.$router.replace({ name: 'home' })
       } catch (error) {

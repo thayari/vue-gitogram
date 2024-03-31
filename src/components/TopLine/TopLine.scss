@@ -20,3 +20,29 @@
 	flex-direction: row;
 	align-items: center;
 }
+
+.logo {
+	white-space: nowrap;
+	margin-right: auto;
+}
+
+.icons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 145px;
+	width: 145px;
+}
+
+.icons * {
+	cursor: pointer;
+}
+
+.avatar {
+	width: 37px;
+	height: 37px;
+	border-radius: 50%;
+	background-color: #7f7f7f;
+	background-size: cover;
+}

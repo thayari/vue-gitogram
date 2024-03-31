@@ -1,3 +1,5 @@
+import * as api from '../../api'
+
 export const user = {
   namespaced: true,
   state: {
@@ -11,6 +13,20 @@ export const user = {
   actions: {
     updateUser ({ commit }, payload) {
       commit('setUser', payload)
+    },
+
+    async fetchUser ({ commit }) {
+      try {
+        const { data } = await api.user.getUserData()
+
+        if (data) {
+          commit('setUser', data)
+        } else {
+          throw new Error('Invalid user data')
+        }
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 }

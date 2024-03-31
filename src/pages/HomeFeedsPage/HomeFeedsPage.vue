@@ -3,11 +3,7 @@
 	<TopLine>
     <template #headline>
       <LogoView />
-      <div class="icons">
-        <IconView name="IconHome" />
-        <div class="avatar" :style="{ 'background-image': `url(${userAvatarUrl})` }"></div>
-        <IconView name="IconSignout" @click="signout"/>
-      </div>
+      <LoginIcons />
     </template>
     <template #content>
       <div class="loader-wrapper" v-if="trendings.loading">
@@ -47,12 +43,12 @@
 
 <script>
 import TopLine from '@/components/TopLine/TopLine.vue'
-import IconView from '../../icons/IconView.vue'
 import StoryUserItem from '@/components/StoryUserItem/StoryUserItem.vue'
 import PostPreview from '@/components/PostPreview/PostPreview.vue'
 import RepositoryPreview from '@/components/RepositoryPreview/RepositoryPreview.vue'
 import LogoView from '@/components/LogoView/LogoView.vue'
 import LoaderView from '@/components/LoaderView/LoaderView.vue'
+import LoginIcons from '@/components/LoginIcons/LoginIcons.vue'
 
 import { mapState, mapActions } from 'vuex'
 
@@ -60,45 +56,37 @@ export default {
   name: 'HomeFeedsPage',
   components: {
     TopLine,
-    IconView,
     StoryUserItem,
     PostPreview,
     RepositoryPreview,
     LogoView,
-    LoaderView
+    LoaderView,
+    LoginIcons
   },
   computed: {
     ...mapState({
       trendings: state => state.trendings,
       starred: state => state.starred,
       currentSlide: state => state.currentSlide
-    }),
-
-    userAvatarUrl () {
-      return this.$store.state.user.data.avatar_url || 'none'
-    }
+    })
   },
   methods: {
     ...mapActions({
       fetchStarred: 'starred/fetchStarred',
       fetchTrendings: 'trendings/fetchTrendings',
+      fetchUser: 'user/fetchUser',
       setCurrentSlide: 'setCurrentSlide'
     }),
 
     async handleUserItemClick (index) {
       this.setCurrentSlide(index)
       this.$router.push({ name: 'stories' })
-    },
-
-    signout () {
-      localStorage.clear()
-      this.$router.replace({ name: 'auth' })
     }
   },
   async created () {
     this.fetchTrendings()
     this.fetchStarred()
-    console.log(this.starred)
+    this.fetchUser()
   }
 }
 </script>

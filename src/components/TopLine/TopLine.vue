@@ -23,4 +23,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped src="./TopLine.scss"></style>
+<style scoped lang="scss" src="./TopLine.scss"></style>
