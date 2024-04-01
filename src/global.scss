@@ -56,6 +56,10 @@ button {
 	margin-right: auto;
 }
 
+.avatar {
+	background-size: contain;
+}
+
 @media screen and (max-width: 767px) {
   .g-container {
     width: 100%;
