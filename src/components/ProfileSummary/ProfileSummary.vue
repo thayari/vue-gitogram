@@ -3,7 +3,7 @@
 		<div class="column">
 			<div class="avatar" :style="{ 'background-image': `url(${userAvatarUrl})` }"></div>
 		</div>
-		<div class="column">
+		<div class="column user-info">
 			<div class="username">{{ userData.login }}</div>
 			<div class="stats">
 				<span>23</span> reposts  <span>{{ userData.followers }}</span> watchers
@@ -46,10 +46,15 @@ export default {
 }
 
 .stats {
+	white-space: nowrap;
 	font-size: 12px;
 }
 .stats span {
 	font-size: 14px;
 	font-weight: bold;
+}
+
+.user-info {
+	margin-left: 20px;
 }
 </style>

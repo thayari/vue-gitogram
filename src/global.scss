@@ -60,6 +60,16 @@ button {
 	background-size: contain;
 }
 
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+}
+
 @media screen and (max-width: 767px) {
   .g-container {
     width: 100%;

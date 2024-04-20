@@ -1,5 +1,10 @@
 import { makeRequest } from '../requests'
 
+/**
+ * Получает данные пользователя с сервера.
+ * @returns {Promise<object>} Промис, который разрешается данными пользователя.
+ * @throws {Error} Если произошла ошибка при запросе данных пользователя.
+ */
 export const getUserData = () => {
   return makeRequest({
     url: '/user'
@@ -13,9 +18,15 @@ export const getUserData = () => {
     })
 }
 
-export const getUserRepos = () => {
+/**
+ * Получает репозитории пользователя с сервера.
+ * @param {string} fullName - Полное имя пользователя.
+ * @returns {Promise<object[]>} Промис, который разрешается массивом репозиториев пользователя.
+ * @throws {Error} Если произошла ошибка при запросе репозиториев пользователя.
+ */
+export const getUserRepos = fullName => {
   return makeRequest({
-    url: '/usr/repos'
+    url: `/users/${fullName}/repos`
   })
     .then(response => {
       console.log('getUserRepos response:', response)
